@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmailScanner.BusinessLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -57,7 +58,7 @@ namespace EmailScanner.Helpers
         {
             _mailComposeTimer = new System.Timers.Timer();
             _mailComposeTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            _mailComposeTimer.Interval = 2000;
+            _mailComposeTimer.Interval = 5000;
             _mailComposeTimer.Enabled = true;
         }
 
@@ -80,7 +81,7 @@ namespace EmailScanner.Helpers
         private void CheckEmailBody()
         {
             string body = _mail.Body;
-
+            ApplicationManager.Instance.AnalyzeEmailBody(body);
         }
 
         private bool IsEmailHasBody()
